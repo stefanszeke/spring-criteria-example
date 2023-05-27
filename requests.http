@@ -1,0 +1,14 @@
+### match
+GET http://localhost:8080/api/v1/employees/search-matches?firstName=John
+### match
+GET http://localhost:8080/api/v1/employees/search-matches?lastName=Doe
+### match
+GET http://localhost:8080/api/v1/employees/search-matches?firstName=John&lastName=Doe
+
+
+### contains
+GET http://localhost:8080/api/v1/employees/search-contains?email=ail
+### contains
+GET http://localhost:8080/api/v1/employees/search-contains?firstName=j
+### contain
+GET http://localhost:8080/api/v1/employees/search-contains?firstName=g
