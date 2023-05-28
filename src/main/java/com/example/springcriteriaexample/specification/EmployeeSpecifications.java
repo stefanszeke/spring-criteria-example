@@ -7,13 +7,8 @@ import com.example.springcriteriaexample.model.Employee;
 public class EmployeeSpecifications {
 
   public static Specification<Employee> firstNameContains(String firstName) {
-    return (root, query, criteriaBuilder) -> {
-      if (firstName == null)
-        return criteriaBuilder.conjunction();
-
-      return criteriaBuilder.like(
-          criteriaBuilder.lower(root.get("firstName")), "%" + firstName.toLowerCase() + "%");
-    };
+    return (root, query, criteriaBuilder) -> firstName == null ? criteriaBuilder.conjunction()
+        : criteriaBuilder.like(criteriaBuilder.lower(root.get("firstName")), "%" + firstName.toLowerCase() + "%");
   }
 
   public static Specification<Employee> lastNameContains(String lastName) {
@@ -75,4 +70,52 @@ public class EmployeeSpecifications {
       return criteriaBuilder.equal(root.get("email"), email);
     };
   }
+
+  // equal:
+  // public static Specification<Employee> hasId(Long id) {
+  // return (root, query, cb) -> id == null ? cb.conjunction() :
+  // cb.equal(root.get("id"), id);
+  // }
+
+  // between:
+  // public static Specification<Employee> hiredBetween(Date start, Date end) {
+  // return (root, query, cb) -> {
+  // if (start == null || end == null) {
+  // return cb.conjunction();
+  // }
+  // return cb.between(root.get("hireDate"), start, end);
+  // };
+  // }
+
+  // comparison
+  // public static Specification<Employee> hiredBefore(Date date) {
+  // return (root, query, cb) -> date == null ? cb.conjunction() :
+  // cb.lessThan(root.get("hireDate"), date);
+  // }
+
+  // public static Specification<Employee> hiredAfter(Date date) {
+  // return (root, query, cb) -> date == null ? cb.conjunction() :
+  // cb.greaterThan(root.get("hireDate"), date);
+  // }
+
+  // join
+  // public static Specification<Employee> worksInDepartmentNamed(String
+  // departmentName) {
+  // return (root, query, cb) -> {
+  // if (departmentName == null) {
+  // return cb.conjunction();
+  // }
+  // Join<Employee, Department> departmentJoin = root.join("departments");
+  // return cb.equal(departmentJoin.get("name"), departmentName);
+  // };
+  // }
+
+  // null checks
+  // public static Specification<Employee> nameIsNull() {
+  // return (root, query, cb) -> cb.isNull(root.get("name"));
+  // }
+
+  // public static Specification<Employee> nameIsNotNull() {
+  // return (root, query, cb) -> cb.isNotNull(root.get("name"));
+  // }
 }
