@@ -12,3 +12,6 @@ GET http://localhost:8080/api/v1/employees/search-contains?email=ail
 GET http://localhost:8080/api/v1/employees/search-contains?firstName=j
 ### contain
 GET http://localhost:8080/api/v1/employees/search-contains?firstName=g
+
+### by department
+GET http://localhost:8080/api/v1/employees/search-department/IT

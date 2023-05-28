@@ -2,7 +2,10 @@ package com.example.springcriteriaexample.specification;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.example.springcriteriaexample.model.Department;
 import com.example.springcriteriaexample.model.Employee;
+
+import jakarta.persistence.criteria.Join;
 
 public class EmployeeSpecifications {
 
@@ -68,6 +71,16 @@ public class EmployeeSpecifications {
         return criteriaBuilder.conjunction();
       }
       return criteriaBuilder.equal(root.get("email"), email);
+    };
+  }
+
+  public static Specification<Employee> worksInDepartmentNamed(String departmentName) {
+    return (root, query, criteriaBuilder) -> {
+      if (departmentName == null) {
+        return criteriaBuilder.conjunction();
+      }
+      Join<Employee, Department> departmentJoin = root.join("department");
+      return criteriaBuilder.equal(departmentJoin.get("name"), departmentName);
     };
   }
 
